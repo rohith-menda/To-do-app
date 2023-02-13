@@ -23,7 +23,7 @@ let validate = () => {
         add.click();
 
         (()=>{
-            add.setAttribute("data-bs-dismiss","modal");
+            add.setAttribute("data-bs-dismiss","");
         })()
     }
 }
