@@ -66,7 +66,6 @@ let deleteTask= (e)=>{
     e.parentElement.parentElement.remove();
     data.splice(e.parentElement.parentElement.id,1);
     localStorage.setItem("data", JSON.stringify(data));
-    console.log(data);
 }
 let editTask =(e)=>{
     let task = e.parentElement.parentElement;
@@ -81,5 +80,4 @@ let editTask =(e)=>{
 (()=>{
     data = JSON.parse(localStorage.getItem("data")) || [];
     createTask();
-    console.log(data);
 })()
