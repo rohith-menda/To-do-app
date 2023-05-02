@@ -39,10 +39,10 @@ h2{
 }
 #tasks div{
     padding: 10px;
-    background-color: #5BC0F8;
-    border: 3px solid #5BC0F8;
+    background-color: #AEE2FF;
+    border: 3px solid #AEE2FF;
     border-radius: 5px ;
-    box-shadow: 3px 3px 6px #1C82AD;
+    box-shadow: 3px 3px 6px #AEE2FF;
 }
 #tasks{
     display: grid;
