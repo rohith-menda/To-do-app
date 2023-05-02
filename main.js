@@ -28,34 +28,45 @@ let validate = () => {
     }
 }
 
-let data = {};
+let data = [];
 
 let Acceptdata = () =>{
-    data["text"] = input.value;
-    data["date"] = datetime.value;
-    data["discription"] = textarea.value;
+    data.push({
+        text:input.value,
+        date:datetime.value,
+        discription:textarea.value
+    }
+    )
+    localStorage.setItem("data", JSON.stringify(data));
     createTask();
-    
 }
 let createTask = () => {
-    tasks.innerHTML += 
+    tasks.innerHTML="";
+    data.map((x,y)=>{
+        return(
+            tasks.innerHTML += 
     `
-    <div>
-        <h4 class="fw-bold">${data.text}</h4>
-        <p class="small text-danger">${data.date}</p>
-        <p>${data.discription}</p>
+    <div id=${y}>
+        <h4 class="fw-bold">${x.text}</h4>
+        <p class="small text-danger">${x.date}</p>
+        <p>${x.discription}</p>
         <span id="delete-edit">
           <i onClick="editTask(this);" data-bs-toggle="modal" data-bs-target="#form" class="fa-solid fa-pen-to-square"></i>
           <i onClick="deleteTask(this);" class="fa-solid fa-trash"></i>
         </span>
       </div>
     `
+        )
+    })
     input.value='';
     datetime.value='';
     textarea.value = '';
 }
 let deleteTask= (e)=>{
     e.parentElement.parentElement.remove();
+    data.splice(e.parentElement.parentElement.id,1);
+    localStorage.setItem("data", JSON.stringify(data));
+    console.log(data);
 }
 let editTask =(e)=>{
     let task = e.parentElement.parentElement;
@@ -64,6 +75,11 @@ let editTask =(e)=>{
     datetime.value=task.children[1].innerHTML;
     textarea.value = task.children[2].innerHTML;
 
-    task.remove();
+    deleteTask(e);
 }
 
+(()=>{
+    data = JSON.parse(localStorage.getItem("data")) || [];
+    createTask();
+    console.log(data);
+})()
